@@ -8,7 +8,7 @@ describe('User', () => {
 
     it('create a new user', (done) => {
       const user = {
-        username: 'sergkudinov',
+        username: 'd',
         firstname: 'Sergei',
         lastname: 'Kudinov'
       }
@@ -35,7 +35,7 @@ describe('User', () => {
      // TODO create this test
      // Warning: the user already exists
      const user = {
-      username: 'sergkudinov',
+      username: 'c',
       firstname: 'Sergei',
       lastname: 'Kudinov'
     }
@@ -65,4 +65,24 @@ describe('User', () => {
      })
    })
   
+
+   describe('Update', ()=> {
+    // TODO Create test for the get method
+    it('update a user by username', (done) => {
+      // 1. Create a user
+      const user = {
+       username: 'aminetsl',
+       firstname: 'amine',
+       lastname: 'ts'
+     }
+     
+      // 2. Check the result of the put method is correct
+      users.update(user,user.username, (err, result) => {
+
+       expect(err).to.be.equal(null)
+       expect(result).to.be.equal('OK')
+       done()
+     })
+    })
+  })
 })

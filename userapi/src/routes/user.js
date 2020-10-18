@@ -34,10 +34,42 @@ userRouter
           status: "error",
           msg: err.message
         }
+       
         return resp.status(400).json(respObj)
       }
       const username = req.params.username
-      resp.status(200).json(username)
+      respObj = {
+        status: "success",
+        msg: res
+      }
+      
+      resp.status(200).json(respObj)
+      console.log(resp.body);
+
+  })
+
+})
+
+
+.put('/:username', function (req, resp) {
+  user.update(req.body, req.params.username, (err, res) => {
+    let respObjs
+      if(err) {
+        respObj = {
+          status: "error",
+          msg: err.message
+        }
+        return resp.status(400).json(respObj)
+      }
+      respObj = {
+        status: "success",
+        msg: req.body
+      }
+      const username = req.params.username
+      resp.status(200).json(respObj)
+      console.log(resp.body);
+
+    
   })
 
 })

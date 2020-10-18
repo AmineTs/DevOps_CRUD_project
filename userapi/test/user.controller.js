@@ -85,4 +85,30 @@ describe('User', () => {
      })
     })
   })
+
+
+  describe('Delete', ()=> {
+    // TODO Create test for the get method
+    it('delete a user by username', (done) => {
+      // 1. Create a user
+      var user = [];
+      user[0] = "c";
+      user[1] = "d";
+     
+      // 2. Check the result of the put method is correct
+      users.delete(user[0], (err, result) => {
+
+       expect(err).to.be.equal(null)
+       expect(result).to.be.equal(1)
+       
+     })
+
+     users.delete(user[1], (err, result) => {
+
+      expect(err).to.be.equal(null)
+      expect(result).to.be.equal(1)
+      done()
+    })
+    })
+  })
 })

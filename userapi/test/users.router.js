@@ -104,4 +104,27 @@ describe('Users REST API', () => {
         })
     })
   })
+
+  describe('DELETE /user', ()=> {
+    // TODO Create test for the get method
+    it('delete user by username', (done) => {
+      const user = {
+        username: 'a',
+        firstname: 'amine',
+        lastname: 'tsouli'
+      }
+      chai.request(app)
+        .delete('/user/'+user.username)
+        .send(user)
+        .then((res) => {
+          chai.expect(res).to.have.status(200)
+          chai.expect(res.body.status).to.equal("success")
+          chai.expect(res).to.be.json
+          done()
+        })
+        .catch((err) => {
+           throw err
+        })
+    })
+  })
 })

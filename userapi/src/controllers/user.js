@@ -76,5 +76,29 @@ module.exports = {
       }
     });
 
+   },
+
+
+   delete: (userId, callback) => {
+    // Check parameters
+    if(!userId)
+    return callback(new Error("Wrong user parameters"), null)
+
+    client.exists(userId, function(err, reply) {
+      if (reply === 1) 
+      {
+        console.log('exists');
+        client.del(userId, (err, res) => {
+          if (err) return callback(err, null)
+          callback(null, res) // Return callback
+        })
+      } 
+      else 
+      {
+        console.log('doesn\'t exist');
+        return callback(new Error("User don't exists and can't be deleted"+ userId), null)
+      }
+    });
+
    }
 }

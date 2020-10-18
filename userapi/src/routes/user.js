@@ -68,9 +68,26 @@ userRouter
       const username = req.params.username
       resp.status(200).json(respObj)
       console.log(resp.body);
-
-    
   })
+})
 
+.delete('/:username', function (req, resp) {
+  user.delete(req.params.username, (err, res) => {
+    let respObjs
+      if(err) {
+        respObj = {
+          status: "error",
+          msg: err.message
+        }
+        return resp.status(400).json(respObj)
+      }
+      respObj = {
+        status: "success",
+        msg: "user : "+req.params.username+" deleted"
+      }
+      const username = req.params.username
+      resp.status(200).json(respObj)
+      console.log("user : "+req.params.username+" deleted");
+  })
 })
 module.exports = userRouter

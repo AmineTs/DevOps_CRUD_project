@@ -1,4 +1,6 @@
-const users = require('../src/controllers/user')
+//const users = require('../src/controllers/user');
+//const axios = require('axios');
+//onst user = require('../controllers/user');
 
 
 function createSignUp(username, firstname, lastname, password)
@@ -10,8 +12,35 @@ function createSignUp(username, firstname, lastname, password)
     password:password
   }
  alert('entrée dans '+username+''+firstname+''+lastname+''+password);
-  users.create(user, (err, result));
-  alert('sortie');
+  
+  var myHeaders = new Headers();
+
+  myHeaders.append('Accept', 'application/json');
+  myHeaders.append('Content-Type', 'application/json');
+  myHeaders.append('Access-Control-Allow-Origin', '*');
+  myHeaders.append('Access-Control-Allow-Credentials', 'true');
+  myHeaders.append("Access-Control-Allow-Methods", "POST, GET, OPTIONS, PUT, DELETE");
+  myHeaders.append("Access-Control-Allow-Headers", "Content-Type, Content-Length, Accept-Encoding, X-CSRF-Token");
+
+  var raw = JSON.stringify({"username":username,"firstname":firstname,"lastname":lastname,"password":password});
+
+  var requestOptions = {
+    method: 'POST',
+    headers: myHeaders,
+    body: raw
+  };
+
+  fetch("http://localhost:3000/user", requestOptions)
+    .then(response => response.text())
+    .then(result => console.log(result))
+    .catch(error => console.log('error', error));
+    alert("zebin o lkelb " +raw);
+
+
+
+
+
+
 }
 
 
@@ -259,7 +288,7 @@ function field_focus(field, username)
       {
           alert("NEXT PAGE")
           createSignUp(username,firstname,lastname,password);
-          return window.location.href='Home.html';
+          //return window.location.href='Home.html';
       }
   }
 
@@ -447,7 +476,7 @@ function field_focus(field, username)
 
 
 
-
+/*
 //Fade in dashboard box
 $(document).ready(function(){
     $('.box').hide().fadeIn(1000);
@@ -456,4 +485,6 @@ $(document).ready(function(){
 //Stop click event
 $('a').click(function(event){
     event.preventDefault(); 
-	});
+  });
+  */
+  

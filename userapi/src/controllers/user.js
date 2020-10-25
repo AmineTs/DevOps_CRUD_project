@@ -9,6 +9,7 @@ module.exports = {
     const userObj = {
       firstname: user.firstname,
       lastname: user.lastname,
+      password : user.password
     }
     // Save to DB
     // TODO check if user already exists
@@ -46,9 +47,9 @@ module.exports = {
     if(!userId)
     return callback(new Error("Wrong user parameters"), null)
     const userObj = {
-      username : user.username,
       firstname: user.firstname,
       lastname: user.lastname,
+      password: user.password
     }
     client.exists(userId, function(err, reply) {
       if (reply === 1) 

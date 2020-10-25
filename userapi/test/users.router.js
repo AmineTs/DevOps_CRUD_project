@@ -23,7 +23,8 @@ describe('Users REST API', () => {
       const user = {
         username: 'a',
         firstname: 'Sergei',
-        lastname: 'Kudinov'
+        lastname: 'Kudinov',
+        password:'blabla'
       }
       chai.request(app)
         .post('/user')
@@ -88,7 +89,8 @@ describe('Users REST API', () => {
       const user = {
         username: 'aminetsl',
         firstname: 'amine',
-        lastname: 'tsouli'
+        lastname: 'tsouli',
+        password:'blabla'
       }
       chai.request(app)
         .put('/user/'+user.username)
@@ -111,7 +113,8 @@ describe('Users REST API', () => {
       const user = {
         username: 'a',
         firstname: 'amine',
-        lastname: 'tsouli'
+        lastname: 'tsouli',
+        password:'blabla'
       }
       chai.request(app)
         .delete('/user/'+user.username)

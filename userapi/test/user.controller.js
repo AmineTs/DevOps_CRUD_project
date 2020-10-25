@@ -10,7 +10,8 @@ describe('User', () => {
       const user = {
         username: 'd',
         firstname: 'Sergei',
-        lastname: 'Kudinov'
+        lastname: 'Kudinov',
+        password:'blabla'
       }
       users.create(user, (err, result) => {
         expect(err).to.be.equal(null)
@@ -37,7 +38,8 @@ describe('User', () => {
      const user = {
       username: 'c',
       firstname: 'Sergei',
-      lastname: 'Kudinov'
+      lastname: 'Kudinov',
+      password:'blabla'
     }
     users.create(user, (err, result) => {
       expect(err).to.not.be.equal("User already exists")
@@ -53,7 +55,8 @@ describe('User', () => {
        const user = {
         username: 'sergkudinov',
         firstname: 'Sergei',
-        lastname: 'Kudinov'
+        lastname: 'Kudinov',
+        password:'blabla'
       }
        // 2. Check the result of the get method is correct
        users.get(user.username, (err, result) => {
@@ -73,7 +76,8 @@ describe('User', () => {
       const user = {
        username: 'aminetsl',
        firstname: 'amine',
-       lastname: 'ts'
+       lastname: 'ts',
+       password:'blabla'
      }
      
       // 2. Check the result of the put method is correct

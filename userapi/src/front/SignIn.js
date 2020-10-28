@@ -2,46 +2,9 @@
 //const axios = require('axios');
 //onst user = require('../controllers/user');
 
-
-function createSignUp(username, firstname, lastname, password)
-{
-  const user = {
-    username: username,
-    firstname: firstname,
-    lastname: lastname,
-    password:password
-  }
- alert('entrée dans '+username+''+firstname+''+lastname+''+password);
-  
-  var myHeaders = new Headers();
-
-  myHeaders.append('Accept', 'application/json');
-  myHeaders.append('Content-Type', 'application/json');
-  myHeaders.append('Access-Control-Allow-Origin', '*');
-  myHeaders.append('Access-Control-Allow-Credentials', 'true');
-  myHeaders.append("Access-Control-Allow-Methods", "POST, GET, OPTIONS, PUT, DELETE");
-  myHeaders.append("Access-Control-Allow-Headers", "Content-Type, Content-Length, Accept-Encoding, X-CSRF-Token");
-
-  var raw = JSON.stringify({"username":username,"firstname":firstname,"lastname":lastname,"password":password});
-
-  var requestOptions = {
-    method: 'POST',
-    headers: myHeaders,
-    body: raw
-  };
-
-  fetch("http://localhost:3000/user", requestOptions)
-    .then(response => response.text())
-    .then(result => console.log(result))
-    .catch(error => console.log('error', error));
-    alert("zebin o lkelb " +raw);
+const { exists } = require("../dbClient");
 
 
-
-
-
-
-}
 
 
 
@@ -286,11 +249,108 @@ function field_focus(field, username)
       }
      else if (username !='username' && username !='' && firstname !='Firstname' && firstname !='' && lastname !='Lastname' && lastname !='' && password !='username' && password !='' && confpassword !='username' && confpassword !='')
       {
-          alert("NEXT PAGE")
-          createSignUp(username,firstname,lastname,password);
-          //return window.location.href='Home.html';
+        (async () => {
+          console.log("Valeaur de la fcnt "+ await getting(username))
+          if(await getting(username)!=0)
+          {
+            console.log("NEXT PAGE")
+            createSignUp(username,firstname,lastname,password);
+            return window.location.href='Home.html';
+          }
+          else
+          {
+            alert("Username already exist please change")
+            usernameWrong.style.color="red";
+            usernameWrong.style.borderColor="red";
+            usernameWrong.style.borderBottomColor="red";
+          }
+        })()
+        
+
+        
       }
   }
+
+
+  function createSignUp(username, firstname, lastname, password)
+{
+  const user = {
+    username: username,
+    firstname: firstname,
+    lastname: lastname,
+    password:password
+  }
+ alert('entrée dans '+username+''+firstname+''+lastname+''+password);
+  
+  var myHeaders = new Headers();
+
+  myHeaders.append('Accept', 'application/json');
+  myHeaders.append('Content-Type', 'application/json');
+  myHeaders.append('Access-Control-Allow-Origin', '*');
+  myHeaders.append('Access-Control-Allow-Credentials', 'true');
+  myHeaders.append("Access-Control-Allow-Methods", "POST, GET, OPTIONS, PUT, DELETE");
+  myHeaders.append("Access-Control-Allow-Headers", "Content-Type, Content-Length, Accept-Encoding, X-CSRF-Token");
+
+  var raw = JSON.stringify({"username":username,"firstname":firstname,"lastname":lastname,"password":password});
+
+  var requestOptions = {
+    method: 'POST',
+    headers: myHeaders,
+    body: raw
+  };
+  fetch("http://localhost:3000/user", requestOptions)
+  .then(response => response.text())
+  .then(result => console.log(result))
+  .catch(error => console.log('error', error));
+  console.log("zebin o lkelb " +raw);
+
+}
+
+async function getting (username,count)
+{
+ const result = await fetchget(username,count)
+ return result;
+}
+
+
+async function fetchget(username,count)
+{
+  var getusername=0;
+  var count=0;
+  requestOptions = 
+  {
+     method: 'GET',
+     redirect: 'follow'
+  };
+const exist = await fetch("http://localhost:3000/user/", requestOptions,getusername, count)
+.then(res => res.json())
+.then(res => {        
+  console.log(res.msg);
+  getusername=res.msg;  
+  console.log("v : "+getusername.length);
+  for(var i =0; i<getusername.length;i++)
+  {
+    if(getusername[i]==username)
+      {
+        count++;
+      }
+    } 
+    if(count==0)
+    {
+      console.log("user don't exist ok to create");
+      return 1;
+    }
+    else
+    {
+      console.log("user already exist can't be created");
+      return 0;
+    }
+  });
+  
+  return exist;
+}
+
+
 
   function disconnect()
   {

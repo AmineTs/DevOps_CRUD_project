@@ -81,6 +81,20 @@ describe('Users REST API', () => {
            throw err
         })
     })
+
+    it('get all usernames', (done) => {
+      chai.request(app)
+        .get('/user/')
+        .then((res) => {
+          chai.expect(res).to.have.status(200)
+          chai.expect(res.body.status).to.equal('success')
+          chai.expect(res).to.be.json
+          done()
+        })
+        .catch((err) => {
+           throw err
+        })
+    })
   })
 
   describe('UPDATE /user', ()=> {

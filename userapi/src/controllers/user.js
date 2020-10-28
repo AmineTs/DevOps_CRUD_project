@@ -37,10 +37,20 @@ module.exports = {
       client.hgetall(username, (err, res) => {
         if (err) return callback(err, null)
         callback(null, res) // Return callback
-        console.log("firstname : "+res.firstname);
+        //console.log("firstname : "+res.firstname);
         
     })
    },
+
+   getall: (callback) => {
+    // TODO create this method
+     client.keys("*", (err, res) => {
+       if (err) return callback(err, null)
+       callback(null, res) // Return callback
+       console.log("All firstnames : "+res);
+       
+   })
+  },
 
    update: (user,userId, callback) => {
     // Check parameters

@@ -66,6 +66,14 @@ describe('User', () => {
         done()
       })
      })
+
+     it('get all', (done) => {
+      // 2. Check the result of the get method is correct
+      users.getall( (err, result) => {
+       expect(err).to.be.equal(null)
+       done()
+     })
+    })
    })
   
 

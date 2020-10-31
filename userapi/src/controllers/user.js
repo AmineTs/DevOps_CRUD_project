@@ -41,7 +41,7 @@ module.exports = {
         
     })
    },
-
+  
    getall: (callback) => {
     // TODO create this method
      client.keys("*", (err, res) => {
@@ -51,6 +51,8 @@ module.exports = {
        
    })
   },
+
+  
 
    update: (user,userId, callback) => {
     // Check parameters

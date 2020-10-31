@@ -58,6 +58,7 @@ body{
     padding: 8px;
     width:250px;
     font-size:1em;
+    color:"#AAAAAA";
   }
   
   .btn{
@@ -366,5 +367,62 @@ body{
   }
   
   #btn2Update:hover{ 
+  background:#2CC06B; 
+  }
+
+
+
+
+
+
+
+
+  .boxDelete{
+    background:white;
+    width:450px;
+    border-radius:6px;
+    margin: 0 auto 0 auto;
+    padding:0px 0px 70px 0px;
+    border: #2980b9 4px solid; 
+  }
+
+  .btnDelete{
+    background:#cc382e;
+    width:75px;
+    padding-top:5px;
+    padding-bottom:5px;
+    color:white;
+    border-radius:4px;
+    border: #cc382e 1px solid;
+    
+    margin-top:20px;
+    margin-bottom:20px;
+    float:left;
+    margin-left:90px;
+    font-weight:800;
+    font-size:0.8em;
+  }
+  
+  .btnDelete:hover{
+    background:#cc382e; 
+  }
+  
+  #btn2Delete{
+    float:left;
+    background:#2CC06B;
+    width:175px;  padding-top:5px;
+    padding-bottom:5px;
+    color:white;
+    border-radius:4px;
+    border: #2CC06B 1px solid;
+    
+    margin-top:20px;
+    margin-bottom:20px;
+    margin-left:10px;
+    font-weight:800;
+    font-size:0.8em;
+  }
+  
+  #btn2Delete:hover{ 
   background:#2CC06B; 
   }

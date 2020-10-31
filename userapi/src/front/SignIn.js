@@ -2,19 +2,7 @@
 //const axios = require('axios');
 //onst user = require('../controllers/user');
 
-const { exists } = require("../dbClient");
-
-
-
-
-
-
-
-
-
-
-
-
+//const { exists } = require("../dbClient");
 
 
 
@@ -41,6 +29,7 @@ function field_focus(field, username)
   {  
     var usernameGrey = document.getElementById("usernameField");
     var passwordGrey = document.getElementById("passwordField");
+    
     if(field.value == '')
     {
       field.value = username;
@@ -55,7 +44,35 @@ function field_focus(field, username)
     var passwordWrong = document.getElementById("passwordField");
       if (username !='username' && password !='username')
       {
-          return window.location.href='Home.html';
+        (async () => {
+          if(await getting(username)!=0)
+          {
+            alert("Username don't  exist please change")
+            usernameWrong.style.color="red";
+            usernameWrong.style.borderColor="red";
+            usernameWrong.style.borderBottomColor="red";
+          }
+          else
+          {
+            (async () => {
+              if(await gettingpass(username,password)!=0)
+              {
+                alert("Password don't exist please change")
+                passwordWrong.style.color="red";
+                passwordWrong.style.borderColor="red";
+                passwordWrong.style.borderBottomColor="red";
+              }
+              else
+              {
+                console.log("NEXT PAGE")
+                var username_connected = username;
+                localStorage.setItem("Key", username_connected);
+                return window.location.href='Home.html';
+              }
+            })()
+          }
+        })()
+          
       }
 
       if(username =='username' && password =='username')
@@ -153,7 +170,7 @@ function field_focus(field, username)
   {
     var confpasswordBlack = document.getElementById("passwordSignUpConfField");
 
-    if(field.value == firstname)
+    if(field.value == "firstname")
     {
       field.value = '';
       confpasswordBlack.style.color="black";
@@ -255,6 +272,8 @@ function field_focus(field, username)
           {
             console.log("NEXT PAGE")
             createSignUp(username,firstname,lastname,password);
+            var username_connected = username;
+            localStorage.setItem("Key", username_connected);
             return window.location.href='Home.html';
           }
           else
@@ -282,7 +301,7 @@ function field_focus(field, username)
   }
  alert('entrée dans '+username+''+firstname+''+lastname+''+password);
   
-  var myHeaders = new Headers();
+ var myHeaders = new Headers();
 
   myHeaders.append('Accept', 'application/json');
   myHeaders.append('Content-Type', 'application/json');
@@ -337,12 +356,12 @@ const exist = await fetch("http://localhost:3000/user/", requestOptions,getusern
     } 
     if(count==0)
     {
-      console.log("user don't exist ok to create");
+      console.log("user don't exist");
       return 1;
     }
     else
     {
-      console.log("user already exist can't be created");
+      console.log("user already exist");
       return 0;
     }
   });
@@ -350,7 +369,7 @@ const exist = await fetch("http://localhost:3000/user/", requestOptions,getusern
   return exist;
 }
 
-
+//window.onload = getcurrentfield();
 
   function disconnect()
   {
@@ -358,6 +377,46 @@ const exist = await fetch("http://localhost:3000/user/", requestOptions,getusern
   }
 
 
+  async function gettingpass (username,password)
+  {
+   const result = await fetchgetpass(username,password)
+   return result;
+  }
+  
+  
+  async function fetchgetpass(username,password)
+  {
+    var getpass=0;
+    var count=0;
+    requestOptions = 
+    {
+       method: 'GET',
+       redirect: 'follow'
+    };
+  const exist = await fetch("http://localhost:3000/user/"+username, requestOptions,getpass)
+  .then(res => res.json())
+  .then(res => {        
+    console.log(res.msg);
+    getpass=res.msg;  
+    console.log("v : "+getpass.password);
+    
+    if(getpass.password==password)
+    {
+      console.log("password is ok");
+      return 0;
+    }
+    else
+    {
+      console.log("password is not the same");
+      return 1;
+    }
+  });
+    
+    return exist;
+  }
+  
+  
+  
 
 
 
@@ -366,10 +425,53 @@ const exist = await fetch("http://localhost:3000/user/", requestOptions,getusern
 
 
 
+  async function getcurrentfield()
+  {
+   const result = await fetchgetcurrent();
+   var username = document.getElementById("usernameUpdateField");
+   var firstname = document.getElementById("FirstnameUpdateField");
+   var lastname = document.getElementById("LastnameUpdateField");
+   var username_curr = localStorage.getItem("Key");
+   var firstname_curr = localStorage.getItem("Key_firstname");
+   var lastname_curr = localStorage.getItem("Key_lastname");
+
+   username.value=username_curr;
+   firstname.value=firstname_curr;
+   lastname.value=lastname_curr;
 
 
-
-
+   return result;
+  }
+  
+  
+  async function fetchgetcurrent()
+  {
+    var get=0;
+    var username_connected = localStorage.getItem("Key");
+    requestOptions = 
+    {
+       method: 'GET',
+       redirect: 'follow'
+    };
+  const exist = await fetch("http://localhost:3000/user/"+username_connected, requestOptions,get)
+  .then(res => res.json())
+  .then(res => {        
+    console.log(res.msg);
+    get=res.msg;  
+    console.log("v : "+get.password);
+    
+    var curr_user = get.username;
+    localStorage.setItem("Key_username", curr_user);
+    var curr_firstname = get.firstname;
+    localStorage.setItem("Key_firstname", curr_firstname);
+    var curr_lastname = get.lastname;
+    localStorage.setItem("Key_lastname", curr_lastname);
+    var curr_password = get.password;
+    localStorage.setItem("Key_password", curr_password);
+  });
+    
+    return exist;
+  }
 
 
 
@@ -379,61 +481,50 @@ const exist = await fetch("http://localhost:3000/user/", requestOptions,getusern
    function field_focusUsernameUpdate(field, username)
   {
     var usernameBlack = document.getElementById("usernameUpdateField");
+    var username_curr = localStorage.getItem("Key");
 
-    if(field.value == username)
-    {
-      usernameBlack.style.color="black";
-      usernameBlack.style.borderColor="#ccc";
-      usernameBlack.style.borderBottomColor="#ccc";
-    }
+    usernameBlack.style.color="black";
+    usernameBlack.style.borderColor="#ccc";
+    usernameBlack.style.borderBottomColor="#ccc";
+ 
   }
 
   function field_focusFirstnameUpdate(field, firstname)
   {
     var firstnameBlack = document.getElementById("FirstnameUpdateField");
+    firstnameBlack.style.color="black";
+    firstnameBlack.style.borderColor="#ccc";
+    firstnameBlack.style.borderBottomColor="#ccc";
 
-    if(field.value == firstname)
-    {
-      firstnameBlack.style.color="black";
-      firstnameBlack.style.borderColor="#ccc";
-      firstnameBlack.style.borderBottomColor="#ccc";
-    }
+   
+ 
   }
 
   function field_focusLastnameUpdate(field, lastname)
   {
     var lastnameBlack = document.getElementById("LastnameUpdateField");
+    lastnameBlack.style.color="black";
+    lastnameBlack.style.borderColor="#ccc";
+    lastnameBlack.style.borderBottomColor="#ccc";
 
-    if(field.value == lastname)
-    {
-      lastnameBlack.style.color="black";
-      lastnameBlack.style.borderColor="#ccc";
-      lastnameBlack.style.borderBottomColor="#ccc";
-    }
   }
 
   function field_focusPasswordUpdate(field, password)
   {
     var passwordBlack = document.getElementById("passwordUpdateField");
-
-    if(field.value == password)
-    {
-      passwordBlack.style.color="black";
-      passwordBlack.style.borderColor="#ccc";
-      passwordBlack.style.borderBottomColor="#ccc";
-    }
+    passwordBlack.style.color="black";
+    passwordBlack.style.borderColor="#ccc";
+    passwordBlack.style.borderBottomColor="#ccc";
+ 
   }
 
   function field_focusNewPasswordUpdate(field, newpassword)
   {
     var newpasswordBlack = document.getElementById("passwordUpdateNewField");
+    newpasswordBlack.style.color="black";
+    newpasswordBlack.style.borderColor="#ccc";
+    newpasswordBlack.style.borderBottomColor="#ccc";
 
-    if(field.value == newpassword)
-    {
-      newpasswordBlack.style.color="black";
-      newpasswordBlack.style.borderColor="#ccc";
-      newpasswordBlack.style.borderBottomColor="#ccc";
-    }
   }
 
   function field_blurUpdate(field, username)
@@ -443,21 +534,24 @@ const exist = await fetch("http://localhost:3000/user/", requestOptions,getusern
     var lastnameGrey = document.getElementById("LastnameUpdateField");
     var passwordGrey = document.getElementById("passwordUpdateField");
     var newpasswordGrey = document.getElementById("passwordUpdateNewField");
+    var username_curr = localStorage.getItem("Key");
+    var firstname_curr = localStorage.getItem("Key_firstname");
+    var lastname_curr = localStorage.getItem("Key_lastname");
     if(field.value == '')
     {
       field.value = username;
       switch(field.value) {
-        case "username":
+        case username_curr:
             usernameGrey.style.color="#AAAAAA";
             passwordGrey.style.color="#AAAAAA";
             newpasswordGrey.style.color="#AAAAAA";
 
           break;
-        case "Firstname":
+        case firstname_curr:
             firstnameGrey.style.color="#AAAAAA";
 
           break;
-        case "Lastname":
+        case lastname_curr:
             lastnameGrey.style.color="#AAAAAA";
 
         break;  
@@ -496,41 +590,135 @@ const exist = await fetch("http://localhost:3000/user/", requestOptions,getusern
         lastnameWrong.style.borderColor="red";
         lastnameWrong.style.borderBottomColor="red";
       }
-      if (password =='')
-      {
-        passwordWrong.style.color="red";
-        passwordWrong.style.borderColor="red";
-        passwordWrong.style.borderBottomColor="red";
-      }
-      if (newpassword =='')
-      {
-        newpasswordWrong.style.color="red";
-        newpasswordWrong.style.borderColor="red";
-        newpasswordWrong.style.borderBottomColor="red";
-      }
-      if(password != newpassword)
-      {
-        passwordWrong.style.color="red";
-        passwordWrong.style.borderColor="red";
-        passwordWrong.style.borderBottomColor="red";
 
-        alert("Your password is not correct");
-      }
+
 
      else if (username !='' && firstname !='' && lastname !='' && password !='' && newpassword !='')
       {
-          alert("Values and passwords Updated");
-         // return window.location.href='Home.html';
+
+        (async () => {
+          var username_curr = localStorage.getItem("Key");
+          if(await gettingpass(username_curr,password)!=0)
+          {
+            alert("Password don't exist please change")
+            passwordWrong.style.color="red";
+            passwordWrong.style.borderColor="red";
+            passwordWrong.style.borderBottomColor="red";
+          }
+          else
+          {  
+            (async () => {
+              if(await updatefield(username, firstname, lastname, newpassword)!=0)
+              {
+                alert("Values and passwords Updated");
+                var username_conn = username;
+                localStorage.setItem("Key", username_conn);
+                return window.location.href='Home.html';
+              }
+              
+
+          })()
+
+          }
+        })()
+
       }
       else if (username !='' && firstname !='' && lastname !='')
       {
-          alert("Values Updated");
-         // return window.location.href='Home.html';
+        newpassword =localStorage.getItem("Key_password");
+        (async () => {
+          if(await updatefield(username, firstname, lastname, newpassword)!=0)
+          {
+            alert("Values Updated");
+            var username_conn = username;
+            localStorage.setItem("Key", username_conn);
+            return window.location.href='Home.html';
+          }
+        })()
+
       }
+  }
+
+  async function updatefield(username, firstname, lastname, newpassword)
+  {
+   const result = await fetchupdate(username, firstname, lastname, newpassword);
+   return result;
+  }
+  
+  
+  async function fetchupdate(username, firstname, lastname, newpassword)
+  {
+    var get=0;
+    console.log("OK ON RENTRE ICI ");
+    var username_connected = localStorage.getItem("Key");
+    var myHeaders = new Headers();
+    myHeaders.append('Accept', 'application/json');
+    myHeaders.append('Content-Type', 'application/json');
+    myHeaders.append('Access-Control-Allow-Origin', '*');
+    myHeaders.append('Access-Control-Allow-Credentials', 'true');
+    myHeaders.append("Access-Control-Allow-Methods", "POST, GET, OPTIONS, PUT, DELETE");
+    myHeaders.append("Access-Control-Allow-Headers", "Content-Type, Content-Length, Accept-Encoding, X-CSRF-Token");
+
+    var raw = JSON.stringify({"username":username,"firstname":firstname,"lastname":lastname,"password":newpassword});
+
+    var requestOptions = {
+      method: 'PUT',
+      headers: myHeaders,
+      body: raw,
+      redirect: 'follow'
+    };
+    const exist = fetch("http://localhost:3000/user/"+username_connected, requestOptions)
+    .then(res => res.json())
+    .then(res => {        
+      if(res.status == "success")
+      {
+        return 1;
+      }
+      else
+      {
+        return 0;
+      }
+     
+      
+     
+    });
+    
+    return exist;
   }
 
 
 
+
+
+
+
+
+
+function fetchdelete()
+{ 
+  
+  var myHeaders = new Headers();
+  var username_connected = localStorage.getItem("Key");
+  console.log("user a supp : "+username_connected);
+  myHeaders.append('Accept', 'application/json');
+  myHeaders.append('Content-Type', 'application/json');
+  myHeaders.append('Access-Control-Allow-Origin', '*');
+  myHeaders.append('Access-Control-Allow-Credentials', 'true');
+  myHeaders.append("Access-Control-Allow-Methods", "POST, GET, OPTIONS, PUT, DELETE");
+  myHeaders.append("Access-Control-Allow-Headers", "Content-Type, Content-Length, Accept-Encoding, X-CSRF-Token");
+    var requestOptions = {
+    method: 'DELETE',
+    headers: myHeaders,
+    redirect : 'follow'
+  };
+  fetch("http://localhost:3000/user/"+username_connected, requestOptions)
+  .then(response => response.text())
+  .then(result => console.log(result))
+  .catch(error => console.log('error', error));
+  console.log(" USER DELETED");
+  return window.location.href='Index.html';
+
+}
 
 
 

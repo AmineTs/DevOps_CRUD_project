@@ -53,7 +53,7 @@ describe('User', () => {
      it('get a user by username', (done) => {
        // 1. Create a user
        const user = {
-        username: 'sergkudinov',
+        username: 'd',
         firstname: 'Sergei',
         lastname: 'Kudinov',
         password:'blabla'
@@ -82,7 +82,7 @@ describe('User', () => {
     it('update a user by username', (done) => {
       // 1. Create a user
       const user = {
-       username: 'aminetsl',
+       username: 'd',
        firstname: 'amine',
        lastname: 'ts',
        password:'blabla'

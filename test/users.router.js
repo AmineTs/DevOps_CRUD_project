@@ -64,7 +64,7 @@ describe('Users REST API', () => {
     // TODO Create test for the get method
     it('get user by username', (done) => {
       const user = {
-        username: 'sergkudinov',
+        username: 'a',
         firstname: 'Sergei',
         lastname: 'Kudinov'
       }
@@ -101,7 +101,7 @@ describe('Users REST API', () => {
     // TODO Create test for the get method
     it('update user by username', (done) => {
       const user = {
-        username: 'aminetsl',
+        username: 'a',
         firstname: 'amine',
         lastname: 'tsouli',
         password:'blabla'

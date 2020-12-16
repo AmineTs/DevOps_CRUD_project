@@ -9,3 +9,12 @@ script:
 - npm install
 - echo 'Testing'
 - npm test
+deploy:
+  provider: heroku
+  api_key:
+    secure: 719f29ff-d091-4cf1-8181-26eb61713015
+  app: devops-amine-webapp
+  on:
+    repo: AmineTs/DevOps_CRUD_project
+    branch: main
+  skip_cleanup: 'true'

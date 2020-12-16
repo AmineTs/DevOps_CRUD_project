@@ -12,8 +12,8 @@ script:
 deploy:
   provider: heroku
   api_key:
-    secure: bac531a4-4119-4510-8653-551f822b57cd
-  app: devops_amine_webapp
+    secure: XDk5Bdt9lHAmi1YajkxietSlpKKPqYwQxn50SoqXWPQejJDycuLICpTQh1IJHcT7//WRzuKUqZ7fLjjOYyYmF5UVcTlQr2jrEzYM6f1RkDII5FER1vYpSiNifVjalIyw1G5qtAVSRA4YD0v+0cbtF3Rj3QYempKTEI8IoPzY8ZJryhYWlSBUOxepIlh3T9+6nh0IcO2ZtrzHoGfpaduUZuPO1LufGj6Nodqvd52GGGnEmN1RwKy0AdPeNtuywXjPYsMuj4WJgJYeEBM6K9BwLKktLo7vk+/kOINdshTi1yVtb/zStKA2Io3vNySHFyXaKE5mlxBpw4vOqeSK9zNdsAeiyyyeoPGOaBJIcIuZkt60pDbWyi5752QDz0mRU1GhYEdJU4gHyFrKlGK7J7AZBwK3S0dfTFUOC6WtiBAeXPCGSvmBt3snI3HuiWeaNuiOaeAjMnbdFXBKfsXsIDJe3gAFblhqUIIFrQjU6dHGt4R3aEnktK9mPw9EEH1Tp6iZ/2NkQOuwz9nzdAe4hBWkWVx8japFD+5jJv6vGj3rabOEiGYbLTmdaYtxPqGfxzMCnHiWRmVZJG8hNJl+iLMQfxY1F/2qgW3tYsaDZjoajJ85uC1Rf3dHwNNgZ61IQWRyWKITasixnj/9GqQYQlFVl/D5Iwd9Km8mxH6fy1n/Evo=
+  app: devops-amine-webapp
   on:
     repo: AmineTs/DevOps_CRUD_project
     branch: main

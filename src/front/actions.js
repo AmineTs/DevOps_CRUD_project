@@ -267,7 +267,6 @@ function field_focus(field, username)
      else if (username !='username' && username !='' && firstname !='Firstname' && firstname !='' && lastname !='Lastname' && lastname !='' && password !='username' && password !='' && confpassword !='username' && confpassword !='')
       {
         (async () => {
-          console.log("Valeaur de la fcnt "+ await getting(username))
           if(await getting(username)!=0)
           {
             console.log("NEXT PAGE")
@@ -317,11 +316,10 @@ function field_focus(field, username)
     headers: myHeaders,
     body: raw
   };
-  fetch("http://localhost:3000/user", requestOptions)
+  fetch("/user", requestOptions)
   .then(response => response.text())
   .then(result => console.log(result))
   .catch(error => console.log('error', error));
-  console.log("zebin o lkelb " +raw);
 
 }
 
@@ -341,12 +339,10 @@ async function fetchget(username,count)
      method: 'GET',
      redirect: 'follow'
   };
-const exist = await fetch("http://localhost:3000/user/", requestOptions,getusername, count)
+const exist = await fetch("/user/", requestOptions,getusername, count)
 .then(res => res.json())
 .then(res => {        
-  console.log(res.msg);
   getusername=res.msg;  
-  console.log("v : "+getusername.length);
   for(var i =0; i<getusername.length;i++)
   {
     if(getusername[i]==username)
@@ -369,11 +365,10 @@ const exist = await fetch("http://localhost:3000/user/", requestOptions,getusern
   return exist;
 }
 
-//window.onload = getcurrentfield();
 
   function disconnect()
   {
-    return window.location.href='Index.html'
+    return window.location.href='/'
   }
 
 
@@ -393,12 +388,10 @@ const exist = await fetch("http://localhost:3000/user/", requestOptions,getusern
        method: 'GET',
        redirect: 'follow'
     };
-  const exist = await fetch("http://localhost:3000/user/"+username, requestOptions,getpass)
+  const exist = await fetch("/user/"+username, requestOptions,getpass)
   .then(res => res.json())
   .then(res => {        
-    console.log(res.msg);
     getpass=res.msg;  
-    console.log("v : "+getpass.password);
     
     if(getpass.password==password)
     {
@@ -453,12 +446,10 @@ const exist = await fetch("http://localhost:3000/user/", requestOptions,getusern
        method: 'GET',
        redirect: 'follow'
     };
-  const exist = await fetch("http://localhost:3000/user/"+username_connected, requestOptions,get)
+  const exist = await fetch("/user/"+username_connected, requestOptions,get)
   .then(res => res.json())
   .then(res => {        
-    console.log(res.msg);
     get=res.msg;  
-    console.log("v : "+get.password);
     
     var curr_user = get.username;
     localStorage.setItem("Key_username", curr_user);
@@ -649,7 +640,6 @@ const exist = await fetch("http://localhost:3000/user/", requestOptions,getusern
   async function fetchupdate(username, firstname, lastname, newpassword)
   {
     var get=0;
-    console.log("OK ON RENTRE ICI ");
     var username_connected = localStorage.getItem("Key");
     var myHeaders = new Headers();
     myHeaders.append('Accept', 'application/json');
@@ -667,7 +657,7 @@ const exist = await fetch("http://localhost:3000/user/", requestOptions,getusern
       body: raw,
       redirect: 'follow'
     };
-    const exist = fetch("http://localhost:3000/user/"+username_connected, requestOptions)
+    const exist = fetch("/user/"+username_connected, requestOptions)
     .then(res => res.json())
     .then(res => {        
       if(res.status == "success")
@@ -692,14 +682,11 @@ const exist = await fetch("http://localhost:3000/user/", requestOptions,getusern
 
 
 
-
-
 function fetchdelete()
 { 
   
   var myHeaders = new Headers();
   var username_connected = localStorage.getItem("Key");
-  console.log("user a supp : "+username_connected);
   myHeaders.append('Accept', 'application/json');
   myHeaders.append('Content-Type', 'application/json');
   myHeaders.append('Access-Control-Allow-Origin', '*');
@@ -711,12 +698,12 @@ function fetchdelete()
     headers: myHeaders,
     redirect : 'follow'
   };
-  fetch("http://localhost:3000/user/"+username_connected, requestOptions)
+  fetch("/user/"+username_connected, requestOptions)
   .then(response => response.text())
   .then(result => console.log(result))
   .catch(error => console.log('error', error));
   console.log(" USER DELETED");
-  return window.location.href='Index.html';
+  return window.location.href='/';
 
 }
 

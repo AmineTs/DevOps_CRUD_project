@@ -9,7 +9,7 @@
     <body>
         <link href='https://fonts.googleapis.com/css?family=Open+Sans:700,600' rel='stylesheet' type='text/css'>
         
-        <script src="SignIn.js" type="text/javascript"></script>
+        <script src="actions.js" type="text/javascript"></script>
         
         <form method="post" action="index.html">
         <div class="box">
@@ -30,7 +30,7 @@
         <input id="passwordSignUpConfField" type="Password" name="confirmPasswordSignUp" value="username" onFocus="field_focusConfPasswordSignUp(this, 'username');" onblur="field_blurSignUp(this, 'username');" class="confirmPasswordSignUp" />
 
           
-        <a href="#"><div class="btnSignUp" onclick="location.href = '../front/Index.html';">Cancel</div></a> <!-- End Btn -->
+        <a href="#"><div class="btnSignUp" onclick="location.href = '/';">Cancel</div></a> <!-- End Btn -->
         
         <a href="#"><div id="btn2SignUp" onclick="checkFieldsSignUp(usernameSignUpField.value, FirstnameSignUpField.value,LastnameSignUpField.value, passwordSignUpField.value,passwordSignUpConfField.value)">Register</div></a> <!-- End Btn2 -->
           

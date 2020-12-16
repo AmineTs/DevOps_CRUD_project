@@ -12,8 +12,8 @@ script:
 deploy:
   provider: heroku
   api_key:
-    secure: b7451ae7-eef3-45ce-a6f9-9187ed82a064
-  app: DevOps_amine_webapp
+    secure: bac531a4-4119-4510-8653-551f822b57cd
+  app: devops_amine_webapp
   on:
     repo: AmineTs/DevOps_CRUD_project
     branch: main

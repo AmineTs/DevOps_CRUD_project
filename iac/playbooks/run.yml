@@ -1,0 +1,15 @@
+- hosts: amine_server
+  vars:
+  - redis_port: 6379
+  - redis_databases: 1
+  - ansible_python_interpreter: "{{ '/usr/bin/python3' }}"
+  - appDir: "/vagrant"
+  # Run commands as root
+  become: true
+  # Roles to be executed on these hosts
+  roles:
+  - role: amine_webapp/install
+    tags: install
+
+  - role: amine_webapp/healthchecks
+    tags: check

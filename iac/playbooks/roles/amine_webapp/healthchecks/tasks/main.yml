@@ -1,0 +1,49 @@
+- name: verify nodejs installation
+  command: node -v
+  changed_when: false
+
+- name: verify npm installation
+  command: npm -v
+  changed_when: false
+
+- name: "Ensure Redis is started"
+  service: 
+    name: redis-server 
+    state: started 
+    enabled: yes
+
+- name: verify redis-server service
+  command: service redis-server status
+  changed_when: false
+
+- name: verify redis-server is listening on 6379
+  wait_for: port={{ redis_port }} timeout=1
+  
+
+- name: Check Amine's webapp health
+  uri:
+    url: http://localhost:3000/
+    return_content: yes
+  # Register the output of the module in a variable
+  register: webapp_health
+
+- name: Print Amine's webapp health
+  debug:
+    msg: "{{ webapp_health.content }}"
+
+
+- name: stop Amine's webapp 
+  command: "killall node"
+  args:
+    chdir: "{{ appDir }}"
+
+- name: verify Amine's webapp tests are ok 
+  command: "npm test"
+  args:
+    chdir: "{{ appDir }}"
+  register: webapp_tests_finished
+
+
+- name: Print Amine's webapp tests
+  debug:
+    msg: "{{ webapp_tests_finished.stdout_lines}}"

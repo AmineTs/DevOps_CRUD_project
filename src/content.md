@@ -22,7 +22,7 @@ Test if Redis server is running:
 
 3. Install **NodeJS**: https://nodejs.org/
 
-## 1. Use prepared User API application and run tests
+## 1. Install the web application
 
 Go to folder where you cloned the repo and run these commands:
 
@@ -53,5 +53,5 @@ Now you can go to the web application [HERE](http://localhost:3000/) :-) (try to
 
 
 
-![Alt text](img/Tests.png?raw=true "Tests")
-![Alt text](img/Webapp_screen.PNG?raw=true "webapp")
+![Alt text](../img/Tests.png?raw=true "Tests")
+![Alt text](../img/Webapp_screen.PNG?raw=true "webapp")

@@ -1,0 +1,61 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: Gateway
+metadata:
+  name: amine-webapp-gateway
+spec:
+  selector:
+    istio: ingressgateway # use istio default controller
+  servers:
+  - port:
+      number: 80
+      name: http
+      protocol: HTTP
+    hosts:
+    - "*"
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: amine-webapp
+spec:
+  hosts:
+  - "*"
+  gateways:
+  - amine-webapp-gateway
+  http:
+  - match:
+    - uri:
+        prefix: /
+    
+    route:
+    - destination:
+        host: amine-webapp-service-istio-v1
+        port:
+          number: 3000
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: amine-webapp-version-routing
+spec:
+  hosts:
+  - "*"
+  gateways:
+  - amine-webapp-gateway
+  http:
+  - match:
+    - uri:
+        prefix: /
+    
+    route:
+    - destination:
+        host: amine-webapp-service-istio-v2
+        subset: v2
+      weight: 50
+  - route:
+    - destination:
+        host: amine-webapp-service-istio-v1
+        subset: v1
+      weight: 50
+---
+        

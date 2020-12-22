@@ -1,4 +1,4 @@
-# Cloud native application
+# Service mesh using Istio
 
 I deployed my application using Istio and created [configuration](/istio):
   - route requests between 2 different versions of the app

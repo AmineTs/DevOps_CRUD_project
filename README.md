@@ -19,11 +19,11 @@ git clone https://github.com/AmineTs/DevOps_CRUD_project
 ## Usage
 
 1. [Web application](src/content.md)
-2. [Continuous integration and delivery (CI/CD](CI_CD_content.md)
+2. [Continuous integration and delivery (CI/CD)](CI_CD_content.md)
 3. [Infrastructure as Code (IaC)](iac/content.md)
 4. [Docker & Orchestration with docker-compose](Docker_content.md)
 5. [Container orchestration with Kubernetes](k8s/content.md)
-6. [Cloud-native application](istio/content.md)
+6. [Service mesh using Istio](istio/content.md)
 
 
 ## Full description

@@ -20,7 +20,7 @@ I configured and provisioned a virtual environment to run my application using I
       Disable-WindowsOptionalFeature -Online -FeatureName Microsoft-Hyper-V-All
       ```
 4. Install the webapp using Vagrant and Ansible 
-    - Go to folder where you cloned the repo and place you under [iac/](iac/):
+    - Go to folder where you cloned the repo and place you under [/iac](/iac):
         ```
         cd iac/
         ```

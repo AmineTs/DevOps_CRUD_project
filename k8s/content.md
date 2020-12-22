@@ -19,7 +19,7 @@ I installed Kubernetes cluster using Minikube and created Kubernetes Manifest ya
   minikube status
   ```
 
-3. Go to folder where you cloned the repo and place you under [k8s/](k8s/):
+3. Go to folder where you cloned the repo and place you under [/k8s](/k8s):
   ```bash
   cd k8s/
   ```
@@ -86,7 +86,14 @@ minikube service $SERVICE_NAME
 
 **Note!** To check if your data have been correctly saved in the redis database you can delete it 
 ```bash
-kubectl delete pod <POD_NAME> redis-server
+kubectl delete pod <POD_NAME>
 ```
 Then wait until the pods is ok with the 2 containers and try to sign in with the user that you just created. 
 
+14. Delete all :
+```bash
+  kubectl delete deployment --all
+  kubectl delete service amine-webapp-service
+  kubectl delete pv --all
+  kubectl delete pvc --all
+  ```

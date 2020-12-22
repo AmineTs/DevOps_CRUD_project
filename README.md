@@ -18,6 +18,8 @@ git clone https://github.com/AmineTs/DevOps_CRUD_project
 
 ## Usage
 
+Installation and Results of each part :
+
 1. [Web application](src/content.md)
 2. [Continuous integration and delivery (CI/CD)](CI_CD_content.md)
 3. [Infrastructure as Code (IaC)](iac/content.md)
@@ -26,7 +28,7 @@ git clone https://github.com/AmineTs/DevOps_CRUD_project
 6. [Service mesh using Istio](istio/content.md)
 
 
-## Full description
+## Description
 #### Web Application
 
 Web application with **CRUD user fonctionnality** created with **NodeJs** that store data in a **Redis database**.

@@ -1,5 +1,6 @@
 {
   "redis": {
+    "_comment": "If you are using docker-compose replace <127.0.0.1> by <redis-server>",
     "host": "127.0.0.1",
     "port": 6379
   }

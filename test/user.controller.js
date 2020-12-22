@@ -9,8 +9,8 @@ describe('User', () => {
     it('create a new user', (done) => {
       const user = {
         username: 'd',
-        firstname: 'Sergei',
-        lastname: 'Kudinov',
+        firstname: 'Amine',
+        lastname: 'Tsouli',
         password:'blabla'
       }
       users.create(user, (err, result) => {
@@ -22,8 +22,8 @@ describe('User', () => {
 
     it('passing wrong user parameters', (done) => {
       const user = {
-        firstname: 'Sergei',
-        lastname: 'Kudinov'
+        firstname: 'Amine',
+        lastname: 'Tsouli'
       }
       users.create(user, (err, result) => {
         expect(err).to.not.be.equal(null)
@@ -37,8 +37,8 @@ describe('User', () => {
      // Warning: the user already exists
      const user = {
       username: 'c',
-      firstname: 'Sergei',
-      lastname: 'Kudinov',
+      firstname: 'Amine',
+      lastname: 'Tsouli',
       password:'blabla'
     }
     users.create(user, (err, result) => {
@@ -54,8 +54,8 @@ describe('User', () => {
        // 1. Create a user
        const user = {
         username: 'd',
-        firstname: 'Sergei',
-        lastname: 'Kudinov',
+        firstname: 'Amine',
+        lastname: 'Tsouli',
         password:'blabla'
       }
        // 2. Check the result of the get method is correct

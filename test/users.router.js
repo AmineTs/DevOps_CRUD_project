@@ -22,8 +22,8 @@ describe('Users REST API', () => {
     it('create a new user', (done) => {
       const user = {
         username: 'a',
-        firstname: 'Sergei',
-        lastname: 'Kudinov',
+        firstname: 'Amine',
+        lastname: 'Tsouli',
         password:'blabla'
       }
       chai.request(app)
@@ -42,8 +42,8 @@ describe('Users REST API', () => {
     
     it('pass wrong parameters', (done) => {
       const user = {
-        firstname: 'Sergei',
-        lastname: 'Kudinov'
+        firstname: 'Amine',
+        lastname: 'Tsouli'
       }
       chai.request(app)
         .post('/user')
@@ -65,8 +65,8 @@ describe('Users REST API', () => {
     it('get user by username', (done) => {
       const user = {
         username: 'a',
-        firstname: 'Sergei',
-        lastname: 'Kudinov'
+        firstname: 'Amine',
+        lastname: 'Tsouli'
       }
       chai.request(app)
         .get('/user/'+user.username)
@@ -104,7 +104,7 @@ describe('Users REST API', () => {
         username: 'a',
         firstname: 'amine',
         lastname: 'tsouli',
-        password:'blabla'
+        password:'blabl'
       }
       chai.request(app)
         .put('/user/'+user.username)

@@ -44,6 +44,8 @@ Into the folder where you cloned this repo you can find :
 ## 3. Build and run the app with Docker Compose
 
 **WARNING** Before following the below steps make sure that in your [configuration file](conf/default.json) DevOps_CRUD_project/conf/default.json the host is "redis-server" like that :
+
+
 ![Alt text](img/Conf_file.PNG?raw=true "configuration_file")
 
 

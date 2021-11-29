@@ -89,4 +89,4 @@ Amine TSOULI
 
 amine.tsouli@edu.ece.fr
 
-Apprentice IT Engineer at ECE Paris 4th Year - SI01A Group
+Amine TSOULI - ECE Paris - Engineering Student
